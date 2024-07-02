@@ -77,16 +77,20 @@ class MessagesController extends AppController {
 			ORDER BY messages.created_at ASC'
 		);
 
+		$recipientInfo = $this->User->query(
+			'SELECT name, profile_image FROM users WHERE id = ' . $recipientID
+		);
+
 		// echo "<pre>";
-		// print_r($messageDetails);
+		// print_r($recipientInfo);
 		// die();
 
 		$this->set('messageDetails', $messageDetails); 
 		$this->set('currentUserID', $currentUserID);
 		$this->set('recipientID', $recipientID);
 
-		$this->set('recipientImage', $messageDetails[0]['receiver_users']['profile_image']);
-		$this->set('recipientName', $messageDetails[0]['receiver_users']['receiver_name']);
+		$this->set('recipientImage', $recipientInfo[0]['users']['profile_image']);
+		$this->set('recipientName', $recipientInfo[0]['users']['name']);
 	}
 
 	public function reply($id = null) {
@@ -98,7 +102,7 @@ class MessagesController extends AppController {
 
 			if (empty($message)) {
 				$this->Flash->error(__('Message cannot be empty.'));
-				return $this->redirect(array('action' => 'view', $recipientID));
+				$this->render(array('action' => 'view', $recipientID));
 			}
 
 			$data = array(
@@ -121,6 +125,10 @@ class MessagesController extends AppController {
 
 				echo json_encode($response);
 				die();
+			}
+			else {
+				$this->Flash->error(__('Message was not sent.'));
+				return $this->redirect(array('action' => 'view', $recipientID));
 			}
 		}
 	}
@@ -155,6 +163,10 @@ class MessagesController extends AppController {
 		$this->Flash->error(__('Message was not deleted'));
 		return $this->redirect(array('action' => 'view', $messageDetail['receiver_id']));
 
+	}
+
+	public function findMessage(){
+		
 	}
 
 }

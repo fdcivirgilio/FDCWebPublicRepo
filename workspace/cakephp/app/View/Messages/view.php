@@ -4,6 +4,7 @@
         <img class="w-10 h-10 rounded-full" src="<?php echo $this->Html->url("/" . $recipientImage); ?>"
             alt="Sender's Image">
         <p class="font-bold text-lg dark:text-white"><?= $recipientName ?></p>
+        <p class="font-bold text-lg dark:text-white"><?= $recipientID ?></p>
     </div>
 
     <div id="messageContainer"
