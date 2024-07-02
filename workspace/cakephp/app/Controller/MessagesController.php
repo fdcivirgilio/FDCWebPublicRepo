@@ -90,40 +90,40 @@ class MessagesController extends AppController {
 	}
 
 	public function reply($id = null) {
-    $currentUser = $this->Auth->user('id');
-    $recipientID = $id;
+		$currentUser = $this->Auth->user('id');
+		$recipientID = $id;
 
-    if ($this->request->is('post')) {
-        $message = $this->request->data['reply'];
+		if ($this->request->is('post')) {
+			$message = $this->request->data['reply'];
 
-        if (empty($message)) {
-            $this->Flash->error(__('Message cannot be empty.'));
-            return $this->redirect(array('action' => 'view', $recipientID));
-        }
+			if (empty($message)) {
+				$this->Flash->error(__('Message cannot be empty.'));
+				return $this->redirect(array('action' => 'view', $recipientID));
+			}
 
-        $data = array(
-            'sender_id' => $currentUser,
-            'receiver_id' => $recipientID,
-            'message' => $message,
-            'created_at' => date('Y-m-d H:i:s')
-        );
+			$data = array(
+				'sender_id' => $currentUser,
+				'receiver_id' => $recipientID,
+				'message' => $message,
+				'created_at' => date('Y-m-d H:i:s')
+			);
 
-        $this->Message->create();
-        $this->Message->save($data);
+			$this->Message->create();
+			$this->Message->save($data);
 
-        if ($this->Message->save($data)) {
-            $response = array(
-                'status' => 'success',
-                'message' => 'Message sent.',
-				'data' => $data
-				
-            );
+			if ($this->Message->save($data)) {
+				$response = array(
+					'status' => 'success',
+					'message' => 'Message sent.',
+					'data' => $data
+					
+				);
 
-            echo json_encode($response);
-            die();
-        }
-    }
-}
+				echo json_encode($response);
+				die();
+			}
+		}
+	}
 
 	public function delete($id = null) {
 		$messageID = $id;
