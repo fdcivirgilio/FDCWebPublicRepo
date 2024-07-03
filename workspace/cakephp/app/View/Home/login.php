@@ -1,5 +1,5 @@
 <section class="flex items-center flex-col justify-center min-h-screen">
-    <?php echo $this->Flash->render(); ?>
+    <?= $this->Flash->render(); ?>
     <svg class="w-[100px] h-[100px] text-blue-700 dark:text-blue-500" aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd"

@@ -2,29 +2,29 @@
    <h1 class="text-black dark:text-white text-5xl mb-10 font-medium">Messages</h1>
    <div id="" class="relative w-full max-w-sm overflow-y-scroll bg-white border border-gray-100 rounded-lg dark:bg-gray-700 dark:border-gray-600 h-96">
       <ul id="messageList">
-         <?php foreach ($messages as $message): ?>
+         <? foreach ($messages as $message): ?>
          <li class="border-b border-gray-100 dark:border-gray-600 flex hover:bg-gray-50 dark:hover:bg-gray-800">
-            <a href="/cakephp/profile/view/<?php echo $message['users']['id'] ?>" class="flex self-center ml-2 ">
-                  <img class="me-3 rounded-full w-11 h-11" src="<?php echo $this->Html->url('/' . $message['users']['profile_image']); ?>" alt="User Avatar">
+            <a href="/cakephp/profile/view/<?= $message['users']['id'] ?>" class="flex self-center ml-2 ">
+                  <img class="me-3 rounded-full w-11 h-11" src="<?= $this->Html->url('/' . $message['users']['profile_image']); ?>" alt="User Avatar">
             </a>
             
-            <a href="/cakephp/messages/view/<?php echo $message['users']['id'] ?>" class="flex justify-start w-full px-2 py-3 ">
+            <a href="/cakephp/messages/view/<?= $message['users']['id'] ?>" class="flex justify-start w-full px-2 py-3 ">
                
                <div class>
                   <p class="font-semibold text-md text-gray-900 dark:text-white">
-                     <?php echo $message['users']['name']; ?>
+                     <?= $message['users']['name']; ?>
                   </p>
                   <p class="text-sm text-gray-500 dark:text-gray-400">
-                     <?php if ($message['messages']['sender_id'] == $currentUserID): ?>
+                     <? if ($message['messages']['sender_id'] == $currentUserID): ?>
                      <span class="font-normal text-gray-900 dark:text-gray-200">
                      You:
                      </span>
-                     <?php else: ?>
+                     <? else: ?>
                      <span class="font-normal text-gray-900 dark:text-gray-200">
-                     <?php echo $message['users']['name']; ?>:
+                     <?= $message['users']['name']; ?>:
                      </span>
-                     <?php endif; ?>
-                     <?php 
+                     <? endif; ?>
+                     <? 
                         $maxLength = 35;
                         $fullMessage = $message['messages']['message'];
                         
@@ -33,16 +33,14 @@
                         } else {
                             $shortMessage = $fullMessage;
                         }
-                        echo $shortMessage;
+                            echo $shortMessage;
                         ?>
                   </p>
-                  <!-- <span class="text-xs text-blue-600 dark:text-blue-500">
-                     <?php echo $message['messages']['created_at']; ?>
-                     </span> -->
+               
                </div>
             </a>
          </li>
-         <?php endforeach; ?>
+         <? endforeach; ?>
       </ul>
       <div id="write" class="sticky mt-auto bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-800 dark:border-gray-600">
          <div class="grid h-full w-full max-w-lg mx-auto">

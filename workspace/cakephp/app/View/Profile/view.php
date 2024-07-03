@@ -4,14 +4,20 @@ l<section class="flex items-center flex-col justify-center min-h-screen dark:bg-
         <div class="bg-white dark:bg-gray-800 shadow-lg shadow-gray-200 dark:shadow-gray-900 rounded-2xl p-4 mb-6 w-full">
             <div class="sm:flex xl:block sm:space-x-4 xl:space-x-0">
                 <img class="mb-2 w-24 h-24 rounded-2xl shadow-lg shadow-gray-300 dark:shadow-gray-700 float-left m-5"
-                    src="<?php echo $this->Html->url("/" . $users["users"]["profile_image"]); ?>"
+                    src="<?= $this->Html->url("/" . $users["users"]["profile_image"]); ?>"
                     alt="User's profile image">
                 <div>
                     <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100"><?= $users['users']['name'] ?></h2>
                     <ul class="mt-2 space-y-1">
                         <li class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
-
-                            Gender: <?= $users['users']['gender'] == 'M' ? 'Male' : 'Female' ?>
+                            Gender: <?php if ($users['users']['gender'] == 'M') {
+                                echo 'Male';
+                            } elseif ($users['users']['gender'] == 'F') {
+                                echo 'Female';
+                            } else {
+                                echo 'Not set';
+                            } ?>
+                        </li>
                         </li>
                         <li class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
                             

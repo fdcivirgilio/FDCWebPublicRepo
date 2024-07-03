@@ -1,13 +1,13 @@
 <section class="flex h-screen flex-col justify-center items-center w-full">
    <h1 class="text-black dark:text-white text-5xl mb-10 font-medium">Create new message</h1>
-   <form class="w-2/6 flex gap-2 flex-col" method="post" action="<?php echo $this->Html->url(array('action' => 'create')); ?>">
+   <form class="w-2/6 flex gap-2 flex-col" method="post" action="<?= $this->Html->url(array('action' => 'create')); ?>">
       <select id="recipients" name="recipient" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
          <option selected>Choose recipient</option>
-         <?php foreach ($users as $user): ?>
-         <option value="<?php echo $user['User']['id']; ?>" style="background-image: url('<?php echo $this->Html->url('/' . $user['User']['profile_image']); ?>'); background-size: 24px 24px; background-repeat: no-repeat; background-position: left center;">
-            <?php echo $user['User']['email']; ?>
+         <? foreach ($users as $user): ?>
+         <option value="<?= $user['User']['id']; ?>" style="background-image: url('<?= $this->Html->url('/' . $user['User']['profile_image']); ?>'); background-size: 24px 24px; background-repeat: no-repeat; background-position: left center;">
+            <?= $user['User']['email']; ?>
          </option>
-         <?php endforeach; ?>
+         <? endforeach; ?>
       </select>
       <label for="chat" class="sr-only">Your message</label>
       <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">

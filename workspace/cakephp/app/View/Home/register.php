@@ -1,6 +1,6 @@
 <section class="flex items-center flex-col justify-center min-h-screen">
 
-    <?php echo $this->Flash->render(); ?>
+    <?= $this->Flash->render(); ?>
     <svg class="w-[100px] h-[100px] text-blue-700 dark:text-blue-500" aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd"
@@ -8,24 +8,24 @@
             clip-rule="evenodd" />
     </svg>
     <h1 class="text-black dark:text-white text-5xl mb-10 font-medium">Register</h1>
-    <form class="w-1/4 mx-auto" method="post" action="<?php echo $this->Html->url(array('action' => 'register')); ?>">
+    <form class="w-1/4 mx-auto" method="post" action="<?= $this->Html->url(array('action' => 'register')); ?>">
         <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
             <input type="email" id="email" name="email"
                 class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required />
-            <?php if (!empty($errors['email'])): ?>
-            <div class="text-red-500"><?php echo $errors['email'][0]; ?></div>
-            <?php endif; ?>
+            <? if (!empty($errors['email'])): ?>
+            <div class="text-red-500"><?= $errors['email'][0]; ?></div>
+            <? endif; ?>
         </div>
         <div class="mb-5">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
             <input type="text" id="name" name="name"
                 class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required />
-            <?php if (!empty($errors['name'])): ?>
-            <div class="text-red-500"><?php echo $errors['name'][0]; ?></div>
-            <?php endif; ?>
+            <? if (!empty($errors['name'])): ?>
+            <div class="text-red-500"><?= $errors['name'][0]; ?></div>
+            <? endif; ?>
         </div>
         <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
@@ -33,9 +33,9 @@
             <input type="password" id="password" name="password"
                 class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required />
-            <?php if (!empty($errors['password'])): ?>
-            <div class="text-red-500"><?php echo $errors['password'][0]; ?></div>
-            <?php endif; ?>
+            <? if (!empty($errors['password'])): ?>
+            <div class="text-red-500"><?= $errors['password'][0]; ?></div>
+            <? endif; ?>
         </div>
         <div class="mb-5">
             <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
@@ -43,9 +43,9 @@
             <input type="password" id="confirm_password" name="confirm_password"
                 class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required />
-            <?php if (!empty($errors['confirm_password'])): ?>
-            <div class="text-red-500"><?php echo $errors['confirm_password'][0]; ?></div>
-            <?php endif; ?>
+            <? if (!empty($errors['confirm_password'])): ?>
+            <div class="text-red-500"><?= $errors['confirm_password'][0]; ?></div>
+            <? endif; ?>
         </div>
         <div class="flex justify-center">
             <button type="submit"

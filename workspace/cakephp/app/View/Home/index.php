@@ -18,9 +18,9 @@
             to connect with bored people around the globe and explore the depth of one's boredom. </p>
         <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
 
-            <a href=" <? echo (empty($currentUser['id'])) ? '/cakephp/home/login' : '/cakephp/profile' ?>"
+            <a href=" <?= (empty($currentUser['id'])) ? '/cakephp/home/login' : '/cakephp/profile' ?>"
                 class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                <? echo (empty($currentUser['id'])) ? 'Get started' : 'Update your Profile' ?>
+                <?= (empty($currentUser['id'])) ? 'Get started' : 'Update your Profile' ?>
                 <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"

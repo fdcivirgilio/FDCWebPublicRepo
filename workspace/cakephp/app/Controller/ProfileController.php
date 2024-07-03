@@ -42,7 +42,7 @@ class ProfileController extends AppController {
             return $this->redirect(array('action' => 'index'));
         }
 
-        if ($this->request->is('post') || $this->request->is('put')) {
+        if ($this->request->is('post')) {
 
             $this->User->id = $userId;
 
@@ -94,6 +94,10 @@ class ProfileController extends AppController {
         $users = $this->User->query(
             'SELECT * FROM users where id =' . $id . ' AND status = 1'
         );
+
+        if(!$users) {
+            throw new NotFoundException(__('Invalid user'));
+        }
 
         $this->set('users', $users[0]);        
     }
