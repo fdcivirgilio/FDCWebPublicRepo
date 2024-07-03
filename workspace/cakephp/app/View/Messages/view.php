@@ -1,10 +1,10 @@
 <section class="flex h-screen flex-col justify-center items-center w-full">
     <?php echo $this->Flash->render(); ?>
     <div class="flex items-center gap-1 m-1">
-        <img class="w-10 h-10 rounded-full" src="<?php echo $this->Html->url("/" . $recipientImage); ?>"
-            alt="Sender's Image">
+        <a href="/cakephp/profile/view/<?= $recipientID ?> ">
+            <img class="w-10 h-10 rounded-full" src="<? echo $this->Html->url("/" . $recipientImage); ?>" alt="Sender's Image">
+        </a>
         <p class="font-bold text-lg dark:text-white"><?= $recipientName ?></p>
-        <p class="font-bold text-lg dark:text-white"><?= $recipientID ?></p>
     </div>
 
     <div id="messageContainer"
@@ -12,9 +12,10 @@
         <?php foreach ($messageDetails as $messageDetail): ?>
         <?php if ($messageDetail["messages"]["receiver_id"] == $currentUserID): ?>
         <div id="sender" class="message flex items-start gap-2.5 mb-5">
-            <img class="w-8 h-8 rounded-full"
-                src="<?php echo $this->Html->url("/" . $messageDetail["sender_users"]["profile_image"]); ?>"
-                alt="Sender's Image">
+            <a href="/cakephp/profile/view/<?= $messageDetail["messages"]["sender_id"] ?>">
+                <img class="w-8 h-8 rounded-full" src="<?php echo $this->Html->url("/" . $messageDetail["sender_users"]["profile_image"]); ?>" alt="Sender's Image">
+            </a>
+            
             <div
                 class="flex flex-col leading-1.5 p-3 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
@@ -22,7 +23,6 @@
                         <?php echo date("Y/m/d | H:i",strtotime($messageDetail['messages']['created_at'])); ?>
                     </span>
                 </div>
-
                 <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
                     <?php echo $messageDetail["messages"]["message"]; ?></p>
             </div>

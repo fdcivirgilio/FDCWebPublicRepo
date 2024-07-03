@@ -31,7 +31,7 @@ class HomeController extends AppController {
             $didLogin = $this->Auth->login($user['User']);
 
             if ($didLogin) {
-                return $this->redirect($this->Auth->redirectUrl(array('controller' => 'profile', 'action' => 'index')));
+                return $this->redirect($this->Auth->redirectUrl(array('controller' => 'messages', 'action' => 'index')));
             }
         }
 

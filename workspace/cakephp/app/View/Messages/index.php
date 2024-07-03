@@ -3,9 +3,13 @@
    <div id="" class="relative w-full max-w-sm overflow-y-scroll bg-white border border-gray-100 rounded-lg dark:bg-gray-700 dark:border-gray-600 h-96">
       <ul id="messageList">
          <?php foreach ($messages as $message): ?>
-         <li class="border-b border-gray-100 dark:border-gray-600 ">
-            <a href="/cakephp/messages/view/<?php echo $message['users']['id'] ?>" class="flex justify-start w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
-               <img class="me-3 rounded-full w-11 h-11" src="<?php echo $this->Html->url('/' . $message['users']['profile_image']); ?>" alt="User Avatar">
+         <li class="border-b border-gray-100 dark:border-gray-600 flex hover:bg-gray-50 dark:hover:bg-gray-800">
+            <a href="/cakephp/profile/view/<?php echo $message['users']['id'] ?>" class="flex self-center ml-2 ">
+                  <img class="me-3 rounded-full w-11 h-11" src="<?php echo $this->Html->url('/' . $message['users']['profile_image']); ?>" alt="User Avatar">
+            </a>
+            
+            <a href="/cakephp/messages/view/<?php echo $message['users']['id'] ?>" class="flex justify-start w-full px-2 py-3 ">
+               
                <div class>
                   <p class="font-semibold text-md text-gray-900 dark:text-white">
                      <?php echo $message['users']['name']; ?>

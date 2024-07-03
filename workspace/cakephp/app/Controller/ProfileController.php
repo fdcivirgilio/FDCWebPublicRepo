@@ -76,8 +76,6 @@ class ProfileController extends AppController {
                 } else {
                     $this->Flash->error(__('Unable to update your profile. Please, try again.'));
                     return $this->redirect(array('action' => 'index'));
-                    
-                    
                 }
             } else {
                 $this->set('errors', $this->User->validationErrors);
@@ -91,10 +89,14 @@ class ProfileController extends AppController {
         $this->set('user', $user);
     }
 
+    public function view($id = null) {
+        
+        $users = $this->User->query(
+            'SELECT * FROM users where id =' . $id . ' AND status = 1'
+        );
 
-
-
-
+        $this->set('users', $users[0]);        
+    }
 
     public function delete($id = null) {
         // Prior to 2.5 use
