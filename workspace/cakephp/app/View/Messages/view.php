@@ -39,7 +39,7 @@
                                 <?= date("Y/m/d | H:i", strtotime($messageDetail['messages']['created_at'])); ?>
                             </span>
                         </div>
-                        <p id="" class="recipientUserMessage text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+                        <p id="" class="recipientUserMessage text-sm font-normal py-2.5 text-gray-900 dark:text-white break-all">
                             <?= $messageDetail["messages"]["message"]; ?></p>
                     </div>
                 </div>
