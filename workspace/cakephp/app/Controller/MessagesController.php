@@ -4,7 +4,7 @@ class MessagesController extends AppController {
 	public function index() {
 		$currentUserID = $this->Auth->user('id');
 
-		
+
 		$currentUsersMessageList = $this->Message->query(
 			'SELECT messages.*, users.name, users.profile_image, users.id FROM messages
 			JOIN (
@@ -21,7 +21,7 @@ class MessagesController extends AppController {
 		// echo "<pre>";
 		// print_r($currentUsersMessageList);
 		// die();
-		
+
 		$this->set('messages', $currentUsersMessageList);
 		$this->set('currentUserID', $currentUserID);
 	}
@@ -40,7 +40,7 @@ class MessagesController extends AppController {
 
 		if ($this->request->is('post')) {
 
-			
+
 			$recipientID = $this->request->data['recipient'];
 			$message = $this->request->data['content'];
 
@@ -56,8 +56,6 @@ class MessagesController extends AppController {
 
 			$this->Flash->success(__('Message sent.'));
 			return $this->redirect(array('action' => 'index'));
-			
-			
 		}
 	}
 
@@ -85,7 +83,7 @@ class MessagesController extends AppController {
 		// print_r($recipientInfo);
 		// die();
 
-		$this->set('messageDetails', $messageDetails); 
+		$this->set('messageDetails', $messageDetails);
 		$this->set('currentUserID', $currentUserID);
 		$this->set('recipientID', $recipientID);
 
@@ -120,13 +118,12 @@ class MessagesController extends AppController {
 					'status' => 'success',
 					'message' => 'Message sent.',
 					'data' => $data
-					
+
 				);
 
 				echo json_encode($response);
 				die();
-			}
-			else {
+			} else {
 				$this->Flash->error(__('Message was not sent.'));
 				return $this->redirect(array('action' => 'view', $recipientID));
 			}
@@ -139,34 +136,59 @@ class MessagesController extends AppController {
 		// echo "<pre>";
 		// print_r($messageID);
 		// die();
-		
+
 		if (!$messageID) {
 			throw new NotFoundException(__('Invalid message'));
 		}
-		
+
 		$messageDetail = $this->Message->findById($messageID)['Message'];
 		$messageDetail['status'] = 0;
 
 		$this->Message->save($messageDetail);
 
 		if ($this->Message->save($messageDetail)) {
-			    $response = array(
-                'status' => 'success',
-                'message' => 'Message deleted.',
+			$response = array(
+				'status' => 'success',
+				'message' => 'Message deleted.',
 				'data' => $messageDetail
-			
-            );
 
-            echo json_encode($response);
-            die();
+			);
+
+			echo json_encode($response);
+			die();
 		}
 		$this->Flash->error(__('Message was not deleted'));
 		return $this->redirect(array('action' => 'view', $messageDetail['receiver_id']));
-
 	}
 
-	public function findMessage(){
-		
-	}
+	public function findMessage() {
+		$this->autoRender = false;
 
+		$recipientID = $this->request->query['recipientID'];
+		$currentUserID = $this->Auth->user('id');
+		$word = $this->request->query['findMessage'];
+
+		$foundMessages = $this->Message->query('SELECT Message.message 
+                    FROM messages AS Message 
+                    WHERE Message.status = 1 
+                    AND Message.sender_id = ' . $currentUserID . ' 
+                    AND Message.receiver_id = ' . $recipientID . '
+                    AND Message.message LIKE ' . "'%" . $word . "%'");
+
+		if ($foundMessages) {
+			$response = array(
+				'status' => 'success',
+				'message' => 'Messages found.',
+				'data' => $foundMessages
+			);
+		} else {
+			$response = array(
+				'status' => 'error',
+				'message' => 'No messages found.'
+			);
+		}
+
+		$this->response->type('json');
+		$this->response->body(json_encode($response));
+	}
 }
