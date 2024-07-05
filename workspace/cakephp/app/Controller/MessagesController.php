@@ -55,7 +55,7 @@ class MessagesController extends AppController {
 			$this->Message->save($data);
 
 			$this->Flash->success(__('Message sent.'));
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'view', $recipientID));
 		}
 	}
 
