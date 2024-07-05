@@ -52,12 +52,10 @@
                                 <?= date("Y/m/d | H:i", strtotime($messageDetail['messages']['created_at'])); ?>
                             </span>
                         </div>
-                        <p id="" class="currentUserMessage text-sm font-normal py-2.5 text-white dark:text-white"><?= $messageDetail["messages"]["message"]; ?></p>
+                        <p id="" class="currentUserMessage text-sm font-normal py-2.5 text-white dark:text-white break-all"><?= $messageDetail["messages"]["message"]; ?></p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <img class="w-8 h-8 rounded-full" src="<?= $this->Html->url(
-                                                                    "/" . $messageDetail["sender_users"]["profile_image"]
-                                                                ); ?>" alt="Sender's Image">
+                        <img class="w-8 h-8 rounded-full" src="<?= $this->Html->url("/" . $messageDetail["sender_users"]["profile_image"]); ?>" alt="Sender's Image">
 
                         <!-- 3dots -->
                         <button id="dropdownMenuIconButton<?= $messageDetail['messages']['id']; ?>" data-dropdown-toggle="msgOption<?= $messageDetail['messages']['id']; ?>" data-dropdown-placement="bottom-start" class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:focus:ring-gray-600" type="button">
