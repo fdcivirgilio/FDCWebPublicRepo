@@ -1,5 +1,6 @@
 <section class="flex h-screen flex-col justify-center items-center w-full">
    <h1 class="text-black dark:text-white text-5xl mb-10 font-medium">Create new message</h1>
+   <?= $this->Flash->render(); ?>
    <form class="w-2/6 flex gap-2 flex-col" method="post" action="<?= $this->Html->url(array('action' => 'create')); ?>">
       <select id="recipients" name="recipient" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 

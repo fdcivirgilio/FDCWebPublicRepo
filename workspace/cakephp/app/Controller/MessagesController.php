@@ -40,9 +40,18 @@ class MessagesController extends AppController {
 
 		if ($this->request->is('post')) {
 
-
 			$recipientID = $this->request->data['recipient'];
 			$message = $this->request->data['content'];
+
+			if (!$message) {
+				$this->Flash->error(__('Message cannot be empty.'));
+				$this->redirect(array('action' => 'create'));
+			}
+
+			if (!$recipientID) {
+				$this->Flash->error(__('Recipient cannot be empty.'));
+				$this->redirect(array('action' => 'create'));
+			}
 
 			$data = array(
 				'sender_id' => $currentUser,
