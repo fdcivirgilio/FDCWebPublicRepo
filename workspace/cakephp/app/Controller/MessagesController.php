@@ -73,6 +73,11 @@ class MessagesController extends AppController {
 		$currentUserID = $this->Auth->user('id');
 		$recipientID = $id;
 
+		if ($recipientID == $currentUserID) {
+			$this->Flash->error(__('You cannot send a message to yourself.'));
+			return $this->redirect(array('action' => 'index'));
+		}
+
 		$messageDetails = $this->Message->query(
 			'SELECT messages.*, sender_users.name as sender_name, sender_users.profile_image, receiver_users.name as receiver_name, receiver_users.profile_image
 			FROM messages

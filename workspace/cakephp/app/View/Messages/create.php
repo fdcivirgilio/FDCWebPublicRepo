@@ -59,10 +59,10 @@
                return data.text; // This is the placeholder (i.e., "Choose recipient")
             }
             const imagePath = '/cakephp/app/webroot/files/profile_images/' + data.image;
-            const $span = $(
+            const span = $(
                "<span><img src='" + imagePath + "' class='inline-block mr-2 w-6 h-6 rounded-full' />" + data.text + " | " + data.email + "</span>"
             );
-            return $span;
+            return span;
          },
 
       });
