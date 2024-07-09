@@ -200,4 +200,28 @@ class MessagesController extends AppController {
 		$this->response->type('json');
 		$this->response->body(json_encode($response));
 	}
+
+	public function getUsers() {
+		$this->autoRender = false;
+		$currentUserID = $this->Auth->user('id');
+		$term = $this->request->query['term'];
+
+
+		$users = $this->User->query(
+			"SELECT * FROM users WHERE name LIKE '%$term%' AND status = 1 AND id != $currentUserID"
+		);
+
+		$results = array();
+		foreach ($users as $user) {
+			$imageFile = basename($user['users']['profile_image']);
+			$results[] = array(
+				'id' => $user['users']['id'],
+				'text' => $user['users']['name'],
+				'email' => $user['users']['email'],
+				'image' => $imageFile
+			);
+		}
+
+		return json_encode($results);
+	}
 }

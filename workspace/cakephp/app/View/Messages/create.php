@@ -3,13 +3,8 @@
    <?= $this->Flash->render(); ?>
    <form class="w-2/6 flex gap-2 flex-col" method="post" action="<?= $this->Html->url(array('action' => 'create')); ?>">
       <select id="recipients" name="recipient" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+         <option value=""></option>
 
-         <? foreach ($users as $user) : ?>
-            <option value=""></option>
-            <option value="<?= $user['User']['id']; ?>" data-image="<?= $this->Html->url('/' . $user['User']['profile_image']); ?>">
-               <?= $user['User']['name'] ?> | <?= $user['User']['email']; ?>
-            </option>`
-         <? endforeach; ?>
       </select>
 
       <label for="chat" class="sr-only">Your message</label>
@@ -41,15 +36,34 @@
 <script>
    $(document).ready(function() {
       $('#recipients').select2({
+         placeholder: 'Choose recipient',
+         allowClear: true,
+         minimumInputLength: 1,
+         ajax: {
+            url: '/cakephp/messages/getUsers',
+            dataType: 'json',
+            data: function(params) {
+               return {
+                  term: params.term // search term
+               };
+            },
+            processResults: function(data) {
+               return {
+                  results: data
+               };
+            },
+            cache: true
+         },
          templateResult: function(data) {
             if (!data.id) {
                return data.text; // This is the placeholder (i.e., "Choose recipient")
             }
-            var $span = $("<span><img src='" + data.element.dataset.image + "' class='inline-block mr-2 w-6 h-6 rounded-full' />" + data.text + "</span>");
+            const imagePath = '/cakephp/app/webroot/files/profile_images/' + data.image;
+            const $span = $(
+               "<span><img src='" + imagePath + "' class='inline-block mr-2 w-6 h-6 rounded-full' />" + data.text + " | " + data.email + "</span>"
+            );
             return $span;
          },
-         placeholder: 'Choose recipient',
-         allowClear: true
 
       });
    });
